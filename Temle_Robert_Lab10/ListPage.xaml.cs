@@ -24,9 +24,19 @@ namespace Temle_Robert_Lab10
             await Navigation.PopAsync();
         }
 
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            var shopl = (ShopList)BindingContext;
+
+            listView.ItemsSource = await App.Database.GetListProductsAsync(shopl.ID);
+        }
+
         public ListPage()
         {
             InitializeComponent();
         }
+
+
     }
 }
